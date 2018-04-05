@@ -17,12 +17,14 @@ if [ ! -d "$circdir" ]
                 mkdir "$circdir"
 fi
 
-echo "Type your org name"
-read org
-echo "Type your project name"
-read proj
+echo "Enter URL to your project in the format https://circleci.com/platform/org/project"
+read url
 
-curl -X GET "https://circleci.com/api/v1.1/project/github/${org}/${proj}/config-translation?circle-token=$CIRCLE_TOKEN&branch=circleci-20-test" > "$yaml"
-git add "$circdir"
-git commit -m "Testing script-generated config.yml"
-git push origin circleci-20-test
+plat="$(echo "$url" | awk -F"/" '{ print $2 }')"
+org="$(echo "$url" | awk -F"/" '{ print $3 }')"
+proj="$(echo "$url" | awk -F"/" '{ print $4 }')"
+
+curl -X GET "https://circleci.com/api/v1.1/project/"${plat}"/"${org}"/"${proj}"/config-translation?circle-token=$CIRCLE_TOKEN&branch=circleci-20-test" > "$yaml"
+#git add "$circdir"
+#git commit -m "Testing script-generated config.yml"
+#git push origin circleci-20-test
