@@ -18,8 +18,8 @@ This script is helpful if you're building on 1.0 without a config file (you do n
 
 Running this script locally from the root of your project will:
 
-1. Generate a `.circleci/config.yml` file
-2. Create a new Git branch called `circleci-20-test`
+1. Create a new Git branch called `circleci-20-test`
+2. Generate a `.circleci/config.yml` file
 3. Push a new commit on that branch and build it on CircleCI 2.0
 4. Give you a link so you can see if the new build was successful on CircleCI 2.0
 
