@@ -27,9 +27,10 @@ Running this script locally from the root of your project will:
 
 You will need:
 
-1. project checked out on your local machine
-2. push access to your GitHub or Bitbucket repo
-3. a CircleCI API token (see below)
+1. Git and Curl installedon on your local computer
+2. project checked out on your local computer
+3. push access to your GitHub or Bitbucket repo
+4. a CircleCI API token (see below)
 
 This script makes use of the CircleCI 'config translation' tool which is documented here:
 https://circleci.com/docs/2.0/config-translation/
@@ -42,9 +43,9 @@ https://circleci.com/docs/2.0/config-translation/
 4. Make sure the script is in the root of your project
 5. Make the script executable: `chmod +x cci-config-generator.sh`
 6. Run the script `./cci-config-generator.sh`
-7. The script will ask you for the link to the project on CircleCI in the form: `https://circleci.com/gh/ORG/REPO` (note that `gh` might be `bb` if you're building on ;Bitbucket. We recommend copying and pasting the link from your project on CircleCI).
+7. The script will ask you for the link to the project on CircleCI in the form: `https://circleci.com/gh/ORG/REPO` (note that `gh` might be `bb` if you're building on Bitbucket. We recommend copying and pasting the link from your project on CircleCI).
 8. The script will generate the config, create a branch and kick off a build
-9. Follow the link to see if the build completed successfully
+9. `TODO - Optional` Follow the link to see if the build completed successfully
 
 If you're build is green - congratulations you can now build on CircleCI 2.0.
 
