@@ -1,7 +1,5 @@
 #!/bin/bash
 
-git init
-
 token="$(echo "$CIRCLE_TOKEN")"
 circdir="./.circleci"
 yaml="./.circleci/config.yml"
@@ -17,15 +15,12 @@ if [ ! -d "$circdir" ]
                 mkdir "$circdir"
 fi
 
-echo "Enter URL to your project in the format https://circleci.com/platform/org/project"
+echo -e "Go to your project on CircleCI and copy the URL to your project\nThe URL will be in the format https://circleci.com/vcs-provider/org/project"
 read url
 
 plat="$(echo "$url" | awk -F"/" '{ print $4 }')"
-echo $plat
 org="$(echo "$url" | awk -F"/" '{ print $5 }')"
-echo $org
 proj="$(echo "$url" | awk -F"/" '{ print $6 }')"
-echo $proj
 
 if [ "$plat" == "gh" ]
 	then
@@ -33,10 +28,16 @@ if [ "$plat" == "gh" ]
 elif [ "$plat" == "bb" ]
 	then
 		pl="bitbucket"
+else
+	echo -e "CircleCI currently supports bitbucket and github only"
 fi
 
+branch="$(git ls-remote https://github.com/"${org}"/"${proj}".git circleci-20-test)"
 
-curl -X GET "https://circleci.com/api/v1.1/project/"${pl}"/"${org}"/"${proj}"/config-translation?circle-token=$CIRCLE_TOKEN&branch=circleci-20-test" > ./config
-#git add "$circdir"
-#git commit -m "Testing script-generated config.yml"
-#git push origin circleci-20-test
+if [ -z "$branch" ]
+        then
+                git checkout -b circleci-20-test
+fi
+
+curl -X GET "https://circleci.com/api/v1.1/project/"${pl}"/"${org}"/"${proj}"/config-translation?circle-token=$CIRCLE_TOKEN&branch=circleci-20-test" > "$yaml"
+echo -e "You can now enter the following commands in order to test your build on CircleCI 2.0\ngit add "$circdir"\ngit commit -m \"Testing script-generated config.yml\"\ngit push origin circleci-20-test"
