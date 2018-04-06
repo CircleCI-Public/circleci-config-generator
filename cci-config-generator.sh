@@ -21,10 +21,22 @@ echo "Enter URL to your project in the format https://circleci.com/platform/org/
 read url
 
 plat="$(echo "$url" | awk -F"/" '{ print $4 }')"
+echo $plat
 org="$(echo "$url" | awk -F"/" '{ print $5 }')"
+echo $org
 proj="$(echo "$url" | awk -F"/" '{ print $6 }')"
+echo $proj
 
-curl -X GET "https://circleci.com/api/v1.1/project/"${plat}"/"${org}"/"${proj}"/config-translation?circle-token=$CIRCLE_TOKEN&branch=circleci-20-test" > "$yaml"
+if [ "$plat" == "gh" ]
+	then
+		pl="github"
+elif [ "$plat" == "bb" ]
+	then
+		pl="bitbucket"
+fi
+
+
+curl -X GET "https://circleci.com/api/v1.1/project/"${pl}"/"${org}"/"${proj}"/config-translation?circle-token=$CIRCLE_TOKEN&branch=circleci-20-test" > ./config
 #git add "$circdir"
 #git commit -m "Testing script-generated config.yml"
 #git push origin circleci-20-test
