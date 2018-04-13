@@ -3,7 +3,9 @@
 # Script to generate a CircleCI 2.0 `.circleci/config.yml` file
 # Please see the README for more details
 
-# Set variables
+echo -e "Gathering info please wait..."
+
+# Get and set variables
 circle_dir="./.circleci"
 conf_file="./.circleci/config.yml"
 vcs_provider="$(git remote -v | awk -F'[@.]' 'NR==1{ print $2 }')"
@@ -13,7 +15,7 @@ remote_test_branch="$(git ls-remote git@"$vcs_provider".com:"${project}".git "$t
 local_test_branch="$(git branch -a | grep "$test_branch")"
 
 # Read in API token
-read -p 'Paste your CircleCI API token here: ' circle_token
+read -rp 'Paste your CircleCI API token here: ' circle_token
 
 # Check if this is a GitHub or Bitbucket repo
 if [ "$vcs_provider" != "github" ] && [ "$vcs_provider" != "bitbucket" ] ; then
@@ -68,7 +70,7 @@ echo -e "Generating config file via CircleCI API"
 curl -X GET https://circleci.com/api/v1.1/project/"${vcs_provider}"/"${project}"/config-translation?circle-token="$circle_token"\&branch=circleci-20-test > $conf_file
 echo -e "Config file written to .circleci/config.yml"
 
-read -p 'Would you like to commit this change and push the test branch to try the build on CircleCI? (y/n): ' choice
+read -rp 'Would you like to commit this change and push the test branch to try the build on CircleCI? (y/n): ' choice
 
 if [ "$choice" = "y" ]
   then
