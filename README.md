@@ -2,12 +2,6 @@
 
 The repo contains a shell script to generate a basic configuration file for CircleCI 2.0
 
----
-
-## NOTE: WIP - do not use until this notice has been removed.
-
----
-
 ## Reason to use this
 
 If a project (git repo) is connected to CircleCI and has no `circle.yml` (for CircleCI 1.0) or `.circleci/config.yml` (for CircleCI 2.0) file, CircleCI will try to build on CircleCI 1.0 using 'inference' (we inspect the files and 'infer' what tests to run).
@@ -36,14 +30,14 @@ https://circleci.com/docs/2.0/config-translation/
 
 ## How to use
 
-1. Create an API token in the CircleCI UI: https://circleci.com/account/api
-2. Copy the API token and make it available as an environment variable on your local computer in the current shell: `CIRCLE_TOKEN='YOUR-TOKEN-HERE'`
-3. Download this script https://github.com/CircleCI-Public/circleci-config-generator/blob/master/cci-config-generator.sh
-4. Make sure the script is in the root of your project
-5. Make the script executable: `chmod +x cci-config-generator.sh`
-6. Run the script `./cci-config-generator.sh`
-7. The script will ask you for the link to the project on CircleCI in the form: `https://circleci.com/gh/ORG/REPO` (note that `gh` might be `bb` if you're building on Bitbucket. We recommend copying and pasting the link from your project on CircleCI).
-8. The script will generate the config, create a branch and kick off a build
+1. Download this script https://github.com/CircleCI-Public/circleci-config-generator/blob/master/cci-config-generator.sh
+2. Make sure the script is in the root of your project
+3. Make the script executable: `chmod +x cci-config-generator.sh`
+4. Create an API token in the CircleCI UI: https://circleci.com/account/api
+5. Copy the API token to your clipboard
+4. Run the script `./cci-config-generator.sh`
+5. Paste in your API token when prompted
+6. The script will generate the config, and optionally create a branch and kick off a build
 
 ## Did it work? Next steps
 
