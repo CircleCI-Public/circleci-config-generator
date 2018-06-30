@@ -20,7 +20,7 @@ Running this script locally from the root of your project will:
 
 You will need:
 
-1. Git and Curl installedon on your local computer
+1. Git and Curl installed on your local computer
 2. Project checked out on your local computer
 3. Push access to your GitHub or Bitbucket repo
 4. A CircleCI API token (see below)
