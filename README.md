@@ -30,7 +30,7 @@ https://circleci.com/docs/2.0/config-translation/
 
 ## How to use
 
-1. Download this script https://github.com/CircleCI-Public/circleci-config-generator/blob/master/cci-config-generator.sh
+1. Download this script https://raw.githubusercontent.com/CircleCI-Public/circleci-config-generator/master/cci-config-generator.sh
 2. Make sure the script is in the root of your project
 3. Make the script executable: `chmod +x cci-config-generator.sh`
 4. Create an API token in the CircleCI UI: https://circleci.com/account/api
