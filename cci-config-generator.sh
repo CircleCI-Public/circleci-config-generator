@@ -17,8 +17,6 @@ local_test_branch="$(git branch -a | grep "$test_branch")"
 
 echo "git origin references \`${project}\` hosted by ${vcs_provider}, which will be used as source."
 
-# Read in API token
-read -rp 'Paste your CircleCI API token here: ' circle_token
 
 # Check if this is a GitHub or Bitbucket repo
 if [ "$vcs_provider" != "github" ] && [ "$vcs_provider" != "bitbucket" ] ; then
@@ -67,6 +65,10 @@ if [ ! -d "$conf_file" ]
     echo -e ".circleci/config.yml already exists. Please delete it before running this script again."
     exit
 fi
+
+
+# Read in API token
+read -rp 'Paste your CircleCI API token here: ' circle_token
 
 # Generate config file from translation endpoint
 echo -e "Generating config file via CircleCI API"
