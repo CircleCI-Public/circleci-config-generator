@@ -8,7 +8,7 @@ echo -e "Gathering info please wait..."
 # Get and set variables
 circle_dir="./.circleci"
 conf_file="./.circleci/config.yml"
-vcs_provider="$(git remote -v | awk -F'[@.]' 'NR==1{ print $2 }')"
+vcs_provider="$(git remote get-url --push origin | perl -ne 'print $1 if /([A-Za-z]*)\.(com|org)/')"
 project="$(git remote get-url --push origin | perl -ne 'print $1 if /([^\/:]*\/[^\/]*?)(.git)?$/')"
 test_branch="circleci-20-test"
 remote_test_branch="$(git ls-remote git@"$vcs_provider".com:"${project}".git "$test_branch")"
