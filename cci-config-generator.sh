@@ -9,10 +9,13 @@ echo -e "Gathering info please wait..."
 circle_dir="./.circleci"
 conf_file="./.circleci/config.yml"
 vcs_provider="$(git remote -v | awk -F'[@.]' 'NR==1{ print $2 }')"
-project="$(git remote -v | awk -F'[@:.]' 'NR==1{ print $4 }')"
+project="$(git remote get-url --push origin | perl -ne 'print $1 if /.*(?=\/.*)\/(\S*?\/\S*?)(.git)?$/')"
 test_branch="circleci-20-test"
 remote_test_branch="$(git ls-remote git@"$vcs_provider".com:"${project}".git "$test_branch")"
 local_test_branch="$(git branch -a | grep "$test_branch")"
+
+
+echo "git origin references \`${project}\`, which will be used as source."
 
 # Read in API token
 read -rp 'Paste your CircleCI API token here: ' circle_token
