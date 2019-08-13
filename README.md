@@ -1,4 +1,4 @@
-# Circleci Config Generator
+# CircleCI Config Generator
 
 The repo contains a shell script to generate a basic configuration file for CircleCI 2.0
 
